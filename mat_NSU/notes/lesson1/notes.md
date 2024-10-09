@@ -1,3 +1,5 @@
+# Организация разработки программ на c++ [ссылка на урок](https://www.youtube.com/watch?v=uC0jJGfDxtM&list=PLlb7e2G7aSpTFea2FYxp7mFfbZW-xavhL&index=2) 
+
 # История создания  
 Изначально был транслятор в си и писал его страуструп для себя
 
