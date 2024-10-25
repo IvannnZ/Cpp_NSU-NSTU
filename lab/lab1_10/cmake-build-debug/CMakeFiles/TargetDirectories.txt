@@ -1,0 +1,3 @@
+/home/ivannz/Programing/Cpp_NSU-NSTU/lab/lab1_10/cmake-build-debug/CMakeFiles/lab1_10.dir
+/home/ivannz/Programing/Cpp_NSU-NSTU/lab/lab1_10/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ivannz/Programing/Cpp_NSU-NSTU/lab/lab1_10/cmake-build-debug/CMakeFiles/rebuild_cache.dir

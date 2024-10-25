@@ -1,8 +1,8 @@
+#include <cstring>
 #include <iostream>
 #include <stdio.h>
-#include <string>
 
-#define SIZE_BUFF_TO_READ 512;
+#define SIZE_BUFF_TO_READ 512
 
 int hash (std::string data){
     
@@ -31,21 +31,41 @@ void print_from_bin_file(FILE *file_read) {
     }
 }
 
+void convert_from_file_to_bin_file(FILE *finput, FILE *foutput, char hash) {
+  long ptr_to_start_line = ftell(finput);
+  int len_line = 0;
+  int c;
 
-void convert_from_file_to_bin_file(FILE *finput, FILE *foutput) {
-    long ptr_to_start_line = ftell(finput);
-    int len_line = 0;
-    int c;
+  char buffer[SIZE_BUFF_TO_READ];
 
-    
+  while (fgets(buffer, SIZE_BUFF_TO_READ, finput)) {
+    for (int i = 0; true; i++) {
+      if (buffer[i] != '\n') {
+        buffer[i] = buffer[i] ^ hash;
+      } else {
+        fputs(buffer, foutput);
+        break;
+      }
+    }
+    while (buffer[strlen(buffer) - 1] != '\n' && !feof(finput)) {
+      fgets(buffer, SIZE_BUFF_TO_READ, finput);
+      for (int i = 0; true; i++) {
+        if (buffer[i] != '\n') {
+          buffer[i] = buffer[i] ^ hash;
+        } else {
+          fputs(buffer, foutput);
+          break;
+        }
+      }
+    }
+  }
+
+  /*
 
 
-    /*
-    
-    
     while ((c = getc(finput)) != EOF) {
         len_line++;
-        
+
         if (c == '\n' || c == EOF) {
             fseek(finput, ptr_to_start_line, SEEK_SET);
             unsigned char len_line_byte = (unsigned char)len_line;
@@ -64,8 +84,8 @@ void convert_from_file_to_bin_file(FILE *finput, FILE *foutput) {
             len_line = 0;
         }
     }
-    
-    
+
+
     */
 }
 
