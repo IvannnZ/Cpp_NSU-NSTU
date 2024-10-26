@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 
-#define SIZE_BUFF_TO_READ 512
+#define SIZE_BUFF_TO_READ 256
 
 int Hash(std::string data) {
 
@@ -15,12 +15,12 @@ int Hash(std::string data) {
   return hash;
 }
 
-
-void print_from_bin_file(FILE *file_read, std::string file_name) {
+void print_from_bin_file(FILE *file_read, const std::string &file_name) {
   unsigned char len_line;
   char hash = Hash(file_name);
+  char buffer[256];
+
   while (fread(&len_line, sizeof(unsigned char), 1, file_read)) {
-    char *buffer = new char[len_line];
 
     fread(buffer, sizeof(char), len_line, file_read);
     buffer[len_line] = '\0';
@@ -28,7 +28,6 @@ void print_from_bin_file(FILE *file_read, std::string file_name) {
       buffer[i] = buffer[i] ^ hash;
     }
     std::cout << buffer;
-    delete[] buffer;
   }
 }
 void convert_from_file_to_bin_file(FILE *finput, FILE *foutput,
