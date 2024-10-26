@@ -4,89 +4,114 @@
 
 #define SIZE_BUFF_TO_READ 512
 
-int hash (std::string data){
-    
-    const size_t len = data.length();
-    int hash = 0;
+int Hash(std::string data) {
+  const size_t len = data.length();
+  int hash = 0;
 
-    for (int i = 0; i < len; i++){
-        hash += data[i] * i;
-    }
-
-    return hash;
+  for (int i = 0; i < len; i++) {
+    hash += data[i] * i;
+  }
+  return hash;
 }
+/*
+ void print_from_bin_file(FILE *file_read) {
+   unsigned char len_line;
 
-void print_from_bin_file(FILE *file_read) {
-    unsigned char len_line;
-
-    while (fread(&len_line, sizeof(unsigned char), 1, file_read) == 1) {
-        unsigned char c;
-        for (int i = 0; i < (int)len_line; i++) {
-            if (fread(&c, sizeof(unsigned char), 1, file_read) == 1) {
-                std::cout << c;
-            } else {
-                return;
-            }
-        }
-    }
+while (fread(&len_line, sizeof(unsigned char), 1, file_read) == 1) {
+ unsigned char c;
+ for (int i = 0; i < (int)len_line; i++) {
+   if (fread(&c, sizeof(unsigned char), 1, file_read) == 1) {
+     std::cout << c;
+   } else {
+     return;
+   }
+ }
 }
+}
+ */
 
-void convert_from_file_to_bin_file(FILE *finput, FILE *foutput, char hash) {
-  long ptr_to_start_line = ftell(finput);
-  int len_line = 0;
-  int c;
+void print_from_bin_file(FILE *file_read, std::string file_name) {
+  unsigned char len_line;
+  char hash = Hash(file_name);
+  while (fread(&len_line, sizeof(unsigned char), 1, file_read)) {
+    char *buffer = new char[len_line];
+
+    fread(buffer, sizeof(char), len_line, file_read);
+    buffer[len_line] = '\0';
+    for (int i = 0; i < len_line-1; i++) {
+      buffer[i] = buffer[i] ^ hash;
+    }
+    std::cout << buffer;
+    delete[] buffer;
+  }
+}
+/*
+void print_from_bin_file(FILE *file_read, std::string file_name) {
+  unsigned char len_line;
+  char hash = Hash(std::move(file_name));
 
   char buffer[SIZE_BUFF_TO_READ];
+  while (!feof(file_read)) {
+
+    fgets(buffer, len_line, file_read);
+
+    std::cout<<(int)len_line<<":"<<buffer<<std::endl;
+    for (int i = 0; i < len_line; i++) {
+      // buffer[i] = buffer[i] ^ hash;
+    }
+    fread(&len_line, sizeof(unsigned char), 1, file_read);
+
+  }
+}
+*/
+void convert_from_file_to_bin_file(FILE *finput, FILE *foutput,
+                                   std::string file_name) {
+  long ptr_to_start_line = ftell(finput);
+  unsigned char len_line = 0;
+  int c;
+  char hash = Hash(std::move(file_name));
+  char buffer[SIZE_BUFF_TO_READ];
+  /*
+  for (int i = 0; true; i++) {
+    if (buffer[i] != '\n') {
+      buffer[i] = buffer[i] ^ hash;
+    } else {
+      fputs(buffer, foutput);
+      break;
+    }
+  }
+  */
 
   while (fgets(buffer, SIZE_BUFF_TO_READ, finput)) {
-    for (int i = 0; true; i++) {
+    while (buffer[strlen(buffer) - 1] != '\n' && !feof(finput)) {
+      fgets(buffer, SIZE_BUFF_TO_READ, finput);
+    }
+    len_line = (unsigned char)(ftell(finput) - ptr_to_start_line);
+    fwrite(&len_line, sizeof(unsigned char), 1, foutput);
+
+    fseek(finput, ptr_to_start_line, SEEK_SET);
+    fgets(buffer, SIZE_BUFF_TO_READ, finput);
+    for (int i = 0; i < SIZE_BUFF_TO_READ; i++) {
       if (buffer[i] != '\n') {
         buffer[i] = buffer[i] ^ hash;
       } else {
-        fputs(buffer, foutput);
         break;
       }
     }
+    fputs(buffer, foutput);
     while (buffer[strlen(buffer) - 1] != '\n' && !feof(finput)) {
       fgets(buffer, SIZE_BUFF_TO_READ, finput);
-      for (int i = 0; true; i++) {
+      for (int i = 0; i < SIZE_BUFF_TO_READ; i++) {
         if (buffer[i] != '\n') {
           buffer[i] = buffer[i] ^ hash;
         } else {
-          fputs(buffer, foutput);
           break;
         }
       }
+      fputs(buffer, foutput);
     }
+    ptr_to_start_line = ftell(finput);
   }
-
-  /*
-
-
-    while ((c = getc(finput)) != EOF) {
-        len_line++;
-
-        if (c == '\n' || c == EOF) {
-            fseek(finput, ptr_to_start_line, SEEK_SET);
-            unsigned char len_line_byte = (unsigned char)len_line;
-            fwrite(&len_line_byte, sizeof(unsigned char), 1, foutput);
-            for (int i = 0; i < len_line; i++) {
-                if (c == EOF){
-                    return;
-                }
-                c = getc(finput);
-                //cout<<c<<" ";
-                fwrite(&c, sizeof(char), 1, foutput);
-            }
-            //cout<<endl;
-
-            ptr_to_start_line = ftell(finput);
-            len_line = 0;
-        }
-    }
-
-
-    */
 }
 
 int main(int argc, char* argv[]) {
@@ -118,13 +143,13 @@ int main(int argc, char* argv[]) {
         return 53;
     }
 
-    convert_from_file_to_bin_file(finput, foutput);
+    convert_from_file_to_bin_file(finput, foutput, std::string(argv[1]));
     fclose(finput);
     fclose(foutput);
 
     FILE *file_read = fopen(output_filename.c_str(), "rb");
 
-    print_from_bin_file(file_read);
+    print_from_bin_file(file_read, std::string(argv[1]));
     fclose(file_read);
 
     return 0;
