@@ -5,11 +5,12 @@
 #define SIZE_BUFF_TO_READ 512
 
 int Hash(std::string data) {
+
   const size_t len = data.length();
   int hash = 0;
 
   for (int i = 0; i < len; i++) {
-    hash += data[i] * i;
+    hash += (data[i]-'A')*i;
   }
   return hash;
 }
