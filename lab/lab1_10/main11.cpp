@@ -13,22 +13,7 @@ int Hash(std::string data) {
   }
   return hash;
 }
-/*
- void print_from_bin_file(FILE *file_read) {
-   unsigned char len_line;
 
-while (fread(&len_line, sizeof(unsigned char), 1, file_read) == 1) {
- unsigned char c;
- for (int i = 0; i < (int)len_line; i++) {
-   if (fread(&c, sizeof(unsigned char), 1, file_read) == 1) {
-     std::cout << c;
-   } else {
-     return;
-   }
- }
-}
-}
- */
 
 void print_from_bin_file(FILE *file_read, std::string file_name) {
   unsigned char len_line;
@@ -45,25 +30,6 @@ void print_from_bin_file(FILE *file_read, std::string file_name) {
     delete[] buffer;
   }
 }
-/*
-void print_from_bin_file(FILE *file_read, std::string file_name) {
-  unsigned char len_line;
-  char hash = Hash(std::move(file_name));
-
-  char buffer[SIZE_BUFF_TO_READ];
-  while (!feof(file_read)) {
-
-    fgets(buffer, len_line, file_read);
-
-    std::cout<<(int)len_line<<":"<<buffer<<std::endl;
-    for (int i = 0; i < len_line; i++) {
-      // buffer[i] = buffer[i] ^ hash;
-    }
-    fread(&len_line, sizeof(unsigned char), 1, file_read);
-
-  }
-}
-*/
 void convert_from_file_to_bin_file(FILE *finput, FILE *foutput,
                                    std::string file_name) {
   long ptr_to_start_line = ftell(finput);
@@ -71,16 +37,6 @@ void convert_from_file_to_bin_file(FILE *finput, FILE *foutput,
   int c;
   char hash = Hash(std::move(file_name));
   char buffer[SIZE_BUFF_TO_READ];
-  /*
-  for (int i = 0; true; i++) {
-    if (buffer[i] != '\n') {
-      buffer[i] = buffer[i] ^ hash;
-    } else {
-      fputs(buffer, foutput);
-      break;
-    }
-  }
-  */
 
   while (fgets(buffer, SIZE_BUFF_TO_READ, finput)) {
     while (buffer[strlen(buffer) - 1] != '\n' && !feof(finput)) {
