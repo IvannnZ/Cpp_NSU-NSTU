@@ -35,6 +35,9 @@ typedef std::map<char, Strings> Text;
 Text read_from_file(const char *file_name);
 
 Strings findLargestVector(const Text& text) ;
+
+void print_Strings(Strings strings);
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     std::cout << "incorrect number of args";
@@ -48,7 +51,9 @@ int main(int argc, char *argv[]) {
     return 52;
   }
 
-  Strings str = findLargestVector(text);
+  Strings strings = findLargestVector(text);
+
+  print_Strings(strings);
 
   return 0;
 }
@@ -85,5 +90,7 @@ Strings findLargestVector(const Text& text) {
 }
 
 void print_Strings(Strings string){
-
+  for (const std::string &str : string) {
+    std::cout << str<<std::endl;
+  }
 }
