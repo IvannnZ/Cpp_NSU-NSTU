@@ -32,21 +32,9 @@ std::map< char, Strings > Text;
 typedef std::vector<std::string> Strings;
 typedef std::map<char, Strings> Text;
 
-Text read_from_file(const std::string &file_name);
+Text read_from_file(const char *file_name);
 
-Strings findLargestVector(const Text& text) {
-  Strings maxElement = text.begin()->second;
-  auto func = [](auto c, auto b) { return c.size() > b.size(); };
-  auto a = max_element(text.begin(), text.end(), ([]const auto &c,const auto &b){return c.size() > b.size(); });
-
-  for (std::pair<const char, Strings> it : text) {
-    if (it.second.size() > maxElement.size()) {
-      maxElement = it.second;
-    }
-  }
-
-  return maxElement;
-}
+Strings findLargestVector(const Text& text) ;
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     std::cout << "incorrect number of args";
@@ -66,10 +54,9 @@ int main(int argc, char *argv[]) {
 }
 
 Text read_from_file(const char *file_name) {
-  std::ifstream file((std::string(file_name)));
-
+  std::ifstream file(file_name);
   if (!file.is_open()) {
-    throw std::runtime_error("can`t open file to read");
+    throw std::runtime_error("can`t open file to read:"+std::string (file_name));
   }
   Text text;
   std::string str_read;
@@ -80,4 +67,23 @@ Text read_from_file(const char *file_name) {
   for (std::pair<const char, Strings> lines : text) {
     std::sort(lines.second.begin(), lines.second.end());
   }
+  return text;
+}
+
+Strings findLargestVector(const Text& text) {
+  Strings maxElement = text.begin()->second;
+  //auto func = [](auto c, auto b) { return c.size() > b.size(); };
+  //auto a = max_element(text.begin(), text.end(), [](const auto &c,const auto &b){return c > b; });
+
+  for (std::pair<const char, Strings> it : text) {
+    if (it.second.size() > maxElement.size()) {
+      maxElement = it.second;
+    }
+  }
+
+  return maxElement;
+}
+
+void print_Strings(Strings string){
+
 }
