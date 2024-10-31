@@ -22,6 +22,7 @@ std::map< char, Strings > Text;
 Вывести на экран (в файл) содержимое вектора с наибольшим количеством строк
 */
 
+// the next is 6
 #include "algorithm"
 #include "fstream"
 #include "iostream"
@@ -34,19 +35,17 @@ typedef std::map<char, Strings> Text;
 Text read_from_file(const std::string &file_name);
 
 Strings findLargestVector(const Text& text) {
-  Text::const_iterator maxElement = text.begin();
+  Strings maxElement = text.begin()->second;
+  auto func = [](auto c, auto b) { return c.size() > b.size(); };
+  auto a = max_element(text.begin(), text.end(), ([]const auto &c,const auto &b){return c.size() > b.size(); });
 
-  for (Text::const_iterator it = text.begin(); it != text.end(); ++it) {
-    if (it->second.size() > maxElement->second.size()) {
-      maxElement = it;
+  for (std::pair<const char, Strings> it : text) {
+    if (it.second.size() > maxElement.size()) {
+      maxElement = it.second;
     }
   }
 
-  if (maxElement == text.end()) {
-    throw std::runtime_error("Ошибка: структура данных пуста.");
-  }
-
-  return maxElement->second;
+  return maxElement;
 }
 int main(int argc, char *argv[]) {
   if (argc != 2) {
