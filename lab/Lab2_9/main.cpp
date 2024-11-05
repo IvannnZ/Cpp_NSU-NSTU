@@ -34,7 +34,8 @@ typedef std::map<char, Strings> Text;
 
 Text read_from_file(const char *file_name);
 
-Strings findLargestVector(const Text& text) ;
+Strings findLargestVector(
+    std::pair<const char, std::vector<std::basic_string<char>>> text) ;
 
 void print_Strings(Strings strings);
 
@@ -78,13 +79,10 @@ Text read_from_file(const char *file_name) {
 Strings findLargestVector(const Text& text) {
   Strings maxElement = text.begin()->second;
   //auto func = [](auto c, auto b) { return c.size() > b.size(); };
-  //auto a = max_element(text.begin(), text.end(), [](const auto &c,const auto &b){return c > b; });
+  std::_Rb_tree_const_iterator<
+      std::pair<const char, Strings>>
+      a = std::max_element(text.begin(), text.end(), [](std::pair<const char, Strings> c,const std::pair<const char, Strings> &b){return c > b; });
 
-  for (std::pair<const char, Strings> it : text) {
-    if (it.second.size() > maxElement.size()) {
-      maxElement = it.second;
-    }
-  }
 
   return maxElement;
 }
