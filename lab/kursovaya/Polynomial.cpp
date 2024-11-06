@@ -19,7 +19,7 @@ Polynomial::~Polynomial() {
   // памятью, и потом сам освободится
 }
 
-// Перегрузка оператора присваивания
+// оператор присваивания
 Polynomial &Polynomial::operator=(const Polynomial &other) {
   if (this != &other) {
     coefficients = other.coefficients;
@@ -139,57 +139,46 @@ int &Polynomial::operator[](size_t index) {
   return coefficients[index];
 }
 
-// Преобразование типа
-//Polynomial::operator int() const {
-//  return evaluate(1.0); // Значение полинома при x = 1
-//}
 
-// Функция вывода
 void Polynomial::print() const {
-  bool first = true;  // Флаг, чтобы правильно обрабатывать плюс в начале
+  bool first = true;
 
-  for (int i = coefficients.size() - 1; i >= 0; --i) {
-    int coeff = coefficients[i];
+  if (coefficients.size() == 1){
+    std::cout<<coefficients[0]<<std::endl;
+    return;
+  }
+  for (int deg_x = coefficients.size() - 1; deg_x >= 0; --deg_x) {
+    int coeff = coefficients[deg_x];
 
     // Пропускаем нулевые коэффициенты
     if (coeff == 0) continue;
 
-    // Для первого коэффициента просто выводим его
-    if (first) {
-      if (coeff < 0) {
-        std::cout << "-";  // Если первый коэффициент отрицательный, ставим минус
-        coeff = -coeff;
-      }
-      if (i == 0 || coeff != 1) {  // Если степень 0 или коэффициент не 1
-        std::cout << coeff;
-      }
-      if (i > 0) {
-        std::cout << "x";  // Добавляем "x" только если степень больше 0
-      }
-      first = false;  // Дальше уже будем добавлять знаки плюс или минус
-    }
-    else {
-      // Для остальных коэффициентов
-      if (coeff < 0) {
+    if (coeff < 0) {
+      if (!first) {
         std::cout << " - ";
-        coeff = -coeff;  // Делаем коэффициент положительным
       } else {
+        std::cout << "-";
+      }
+      coeff = -coeff;
+    } else {
+      if (!first) {
         std::cout << " + ";
       }
+    }
+    first = false;
 
       // Выводим коэффициент, если он не 1 и не -1, или если степень 0
-      if (coeff != 1 || i == 0) {
+      if (coeff != 1 || deg_x == 0) {
         std::cout << coeff;
       }
 
       // Выводим степень x, если она больше 0
-      if (i > 0) {
+      if (deg_x > 0) {
         std::cout << "x";
-        if (i > 1) {
-          std::cout << "^" << i;  // Если степень больше 1, добавляем ^ и степень
+        if (deg_x > 1) {
+          std::cout << "^" << deg_x;
         }
       }
-    }
   }
   std::cout << std::endl;
 }

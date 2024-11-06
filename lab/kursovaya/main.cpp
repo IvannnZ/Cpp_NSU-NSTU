@@ -2,12 +2,13 @@
 #include  <iostream>
 
 int main() {
-  Polynomial p1({1, -2, 3});  // Полином 3x^2 - 2x + 1
-  Polynomial p2({0, 2, -1});  // Полином -x^2 + 2x
+  Polynomial p1({1, -2, 3}); // 3x^2 - 2x + 1
+  Polynomial p2({0, 2, -1}); // -x^2 + 2x
+  Polynomial p;
+  p.print(); // 0
+  p1.print(); // 3x^2 - 2x + 1
 
-  p1.print();
-  p2.print();
-
+  p2.print(); // -x + 2x
 
   Polynomial sum = p1 + p2;
   sum.print();  // Вывод результата сложения
