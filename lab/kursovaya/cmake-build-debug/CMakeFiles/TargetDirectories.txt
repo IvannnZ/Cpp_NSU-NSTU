@@ -1,0 +1,3 @@
+/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya/cmake-build-debug/CMakeFiles/kursovaya.dir
+/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya/cmake-build-debug/CMakeFiles/rebuild_cache.dir
