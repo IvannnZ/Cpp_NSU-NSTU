@@ -34,9 +34,8 @@ typedef std::map<char, Strings> Text;
 
 Text read_from_file(const char *file_name);
 
-//Strings findLargestVector(
-//    std::pair<const char, std::vector<std::basic_string<char>>> text) ;
 Strings findLargestVector(const Text& text);
+
 void print_Strings(Strings strings);
 
 int main(int argc, char *argv[]) {
@@ -69,22 +68,24 @@ Text read_from_file(const char *file_name) {
   while (std::getline(file, str_read)) {
     text[str_read[0]].push_back(str_read);
   }
+  if (text.empty()){
+    throw std::runtime_error("file is empty");
+  }
 
-  for (std::pair<const char, Strings> lines : text) {
+  for (std::pair<const char, Strings>& lines : text) {
     std::sort(lines.second.begin(), lines.second.end());
   }
   return text;
 }
 
 Strings findLargestVector(const Text& text) {
-  Strings maxElement = text.begin()->second;
-  //auto func = [](auto c, auto b) { return c.size() > b.size(); };
-  std::_Rb_tree_const_iterator<std::pair<const char, Strings>> a =
-      std::max_element(text.begin(), text.end(),
-          [](std::pair<const char, Strings> c,
-             const std::pair<const char, Strings> &b) { return c > b; });
 
-  return maxElement;
+  std::_Rb_tree_const_iterator<std::pair<const char, Strings>> maxElement =
+      std::max_element(text.begin(), text.end(),
+          [](const std::pair<const char, Strings> &c,
+             const std::pair<const char, Strings> &b) { return c.second.size() < b.second.size(); });
+
+  return maxElement->second;
 }
 
 void print_Strings(Strings string){
