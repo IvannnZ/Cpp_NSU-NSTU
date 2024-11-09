@@ -64,6 +64,19 @@ Polynomial Polynomial::operator*(const Polynomial &other) const {
   return Polynomial(resultCoeffs);
 }
 
+Polynomial Polynomial::operator*(int scalar) const {
+  if (scalar == 0) {
+    Polynomial a;
+    return a;
+  }
+  std::vector<int> resultCoeffs(coefficients.size());
+
+  for (size_t i = 0; i < coefficients.size(); ++i) {
+    resultCoeffs[i] = coefficients[i] * scalar;
+  }
+  return Polynomial(resultCoeffs);
+}
+
 Polynomial Polynomial::operator/(int scalar) const {
   if (scalar == 0)
     throw std::runtime_error("Division by zero");

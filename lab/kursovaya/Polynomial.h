@@ -26,6 +26,7 @@ public:
   Polynomial operator+(const Polynomial& other) const;
   Polynomial operator-(const Polynomial& other) const;
   Polynomial operator*(const Polynomial& other) const;
+  Polynomial operator*(int scalar) const;
   Polynomial operator/(int scalar) const;  // Деление на скаляр
 
   // Арифметика с накоплением
@@ -48,8 +49,6 @@ public:
   int operator[](size_t index) const;
   int& operator[](size_t index);
 
-  // Преобразование типа
-//   operator int () const;
 
   // Функция вывода
   void print() const;
