@@ -37,7 +37,8 @@ Polynomial Polynomial::operator+(const Polynomial &other) const {
     int b = i < other.coefficients.size() ? other.coefficients[i] : 0;
     resultCoeffs[i] = a + b;
   }
-  return Polynomial(resultCoeffs);
+  Polynomial ret = Polynomial(resultCoeffs);
+  return ret;
 }
 
 Polynomial Polynomial::operator-(const Polynomial &other) const {
@@ -49,7 +50,8 @@ Polynomial Polynomial::operator-(const Polynomial &other) const {
     int b = i < other.coefficients.size() ? other.coefficients[i] : 0.0;
     resultCoeffs[i] = a - b;
   }
-  return Polynomial(resultCoeffs);
+  Polynomial ret = Polynomial(resultCoeffs);
+  return ret;
 }
 
 Polynomial Polynomial::operator*(const Polynomial &other) const {
@@ -61,7 +63,8 @@ Polynomial Polynomial::operator*(const Polynomial &other) const {
       resultCoeffs[i + j] += coefficients[i] * other.coefficients[j];
     }
   }
-  return Polynomial(resultCoeffs);
+  Polynomial ret = Polynomial(resultCoeffs);
+  return ret;
 }
 
 Polynomial Polynomial::operator*(int scalar) const {
@@ -74,7 +77,8 @@ Polynomial Polynomial::operator*(int scalar) const {
   for (size_t i = 0; i < coefficients.size(); ++i) {
     resultCoeffs[i] = coefficients[i] * scalar;
   }
-  return Polynomial(resultCoeffs);
+  Polynomial ret = Polynomial(resultCoeffs);
+  return ret;
 }
 
 Polynomial Polynomial::operator/(int scalar) const {
@@ -85,7 +89,8 @@ Polynomial Polynomial::operator/(int scalar) const {
   for (size_t i = 0; i < coefficients.size(); ++i) {
     resultCoeffs[i] = coefficients[i] / scalar;
   }
-  return Polynomial(resultCoeffs);
+  Polynomial ret = Polynomial(resultCoeffs);
+  return ret;
 }
 
 // Арифметика с накоплением
