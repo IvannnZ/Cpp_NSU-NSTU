@@ -53,6 +53,10 @@ public:
   // Функция вывода
   void print() const;
 
+  operator int() const;      // Преобразование в int (старший коэффициент)
+  operator double() const;   // Преобразование в double (значение при x = 1)
+
+
   // Вспомогательная функция для вычисления значения полинома при x
   int evaluate(int x) const;
 };

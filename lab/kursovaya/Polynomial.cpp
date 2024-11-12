@@ -196,7 +196,24 @@ void Polynomial::print() const {
   std::cout << std::endl;
 }
 
+// Оператор преобразования в int
+// возвращает старший коэффициент
+Polynomial::operator int() const {
+  if (coefficients.empty()) {
+    return 0;
+  }
+  return coefficients.back();  // Старший коэффициент — последний элемент в vector
+}
 
+// Оператор преобразования в double
+// Вычисляет значение полинома при x = 1
+Polynomial::operator double() const {
+  double result = 0.0;
+  for (int coeff : coefficients) {
+    result += coeff;  // Сумма всех коэффициентов как значение при x = 1
+  }
+  return result;
+}
 
 // Вспомогательная функция для вычисления значения полинома при x
 int Polynomial::evaluate(int x) const {

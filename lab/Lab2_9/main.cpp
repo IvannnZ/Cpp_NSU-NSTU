@@ -39,7 +39,8 @@ typedef std::map<char, Strings> Text;
 
 Text read_from_file(const char *file_name, Text &text);
 
-Strings findLargestVector(const Text& text);
+std::_Rb_tree_const_iterator<std::pair<const char, Strings>>
+findLargestVector(const Text& text);
 
 void print_Strings(const Strings &strings);
 
@@ -51,14 +52,14 @@ int main(int argc, char *argv[]) {
     Text text;
     text = read_from_file(argv[1], text);
 
-    Strings strings = findLargestVector(text);
+    Strings& strings = findLargestVector(text);
 
     print_Strings(strings);
 
-    return 0;
   } catch (const std::exception &exception) {
     std::cout << exception.what();
   }
+  return 0;
 }
 
 Text read_from_file(const char *file_name, Text &text) {
@@ -68,8 +69,8 @@ Text read_from_file(const char *file_name, Text &text) {
   }
   std::string str_read;
   while (std::getline(file, str_read)) {
-    std::_Rb_tree_iterator<std::pair<const char, Strings>> find_elem =
-        text.find(str_read[0]);
+    Text::iterator find_elem;
+    find_elem = text.find(str_read[0]);
     if (find_elem == text.end()) {
       text.insert({str_read[0], {str_read}});
     } else {
@@ -86,12 +87,13 @@ Text read_from_file(const char *file_name, Text &text) {
   return text;
 }
 
-Strings findLargestVector(const Text& text) {
+std::_Rb_tree_const_iterator<std::pair<const char, Strings>>
+findLargestVector(const Text& text) {
   std::_Rb_tree_const_iterator<std::pair<const char, Strings>> maxElement =
       std::max_element(text.begin(), text.end(),
           [](const std::pair<const char, Strings> &c,
              const std::pair<const char, Strings> &b) { return c.second.size() < b.second.size(); });
-  return maxElement->second;
+  return maxElement;
 }
 
 void print_Strings(const Strings &string) {
