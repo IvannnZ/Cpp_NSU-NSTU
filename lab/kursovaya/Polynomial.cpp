@@ -3,6 +3,10 @@
 #include <cmath>
 #include <stdexcept>
 
+
+//make scal operator class
+
+
 // Конструктор по умолчанию создает нулевой полином
 Polynomial::Polynomial() : coefficients(1, 0) {}
 
@@ -227,4 +231,44 @@ int Polynomial::evaluate(int x) const {
     result += coefficients[i] * std::pow(x, i);
   }
   return result;
+}
+
+Polynomial operator+(int scalar, const Polynomial& poly) {
+  // Складываем скаляр только с нулевым коэффициентом
+  std::vector<int> resultCoeffs = poly.coefficients;
+  if (!resultCoeffs.empty()) {
+    resultCoeffs[0] += scalar;
+  } else {
+    resultCoeffs.push_back(scalar);
+  }
+  return Polynomial(resultCoeffs);
+}
+
+Polynomial operator-(int scalar, const Polynomial& poly) {
+  // Вычитаем полином из скаляра, инвертируем знак всех коэффициентов полинома
+  std::vector<int> resultCoeffs(poly.coefficients.size());
+  for (size_t i = 0; i < poly.coefficients.size(); ++i) {
+    resultCoeffs[i] = -poly.coefficients[i];
+  }
+  if (!resultCoeffs.empty()) {
+    resultCoeffs[0] += scalar;
+  } else {
+    resultCoeffs.push_back(scalar);
+  }
+  return Polynomial(resultCoeffs);
+}
+
+Polynomial operator*(int scalar, const Polynomial& poly) {
+  // Просто умножаем все коэффициенты на скаляр
+  std::vector<int> resultCoeffs(poly.coefficients.size());
+  for (size_t i = 0; i < poly.coefficients.size(); ++i) {
+    resultCoeffs[i] = poly.coefficients[i] * scalar;
+  }
+  return Polynomial(resultCoeffs);
+}
+
+Polynomial operator/(int scalar, const Polynomial& poly) {
+  throw std::runtime_error("Operation 'scalar / Polynomial' is not supported");
+  // Если нужно реализовать, это более сложная задача,
+  // связанная с разбиением полинома.
 }

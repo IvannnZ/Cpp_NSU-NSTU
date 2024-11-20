@@ -28,6 +28,10 @@ public:
   Polynomial operator*(const Polynomial& other) const;
   Polynomial operator*(int scalar) const;
   Polynomial operator/(int scalar) const;  // Деление на скаляр
+  friend Polynomial operator+(int scalar, const Polynomial& poly);
+  friend Polynomial operator-(int scalar, const Polynomial& poly);
+  friend Polynomial operator*(int scalar, const Polynomial& poly);
+  friend Polynomial operator/(int scalar, const Polynomial& poly);
 
   // Арифметика с накоплением
   Polynomial& operator+=(const Polynomial& other);
