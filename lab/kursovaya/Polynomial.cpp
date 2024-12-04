@@ -268,8 +268,22 @@ Polynomial operator*(int scalar, const Polynomial& poly) {
   return Polynomial(resultCoeffs);
 }
 
-Polynomial operator/(int scalar, const Polynomial& poly) {
-  throw std::runtime_error("Operation 'scalar / Polynomial' is not supported");
-  // Если нужно реализовать, это более сложная задача,
-  // связанная с разбиением полинома.
+Polynomial operator/(int scal, const Polynomial &poly) {
+  if (scal == 0) {
+    throw std::runtime_error(
+        "Division by zero scalar is not allowed"); // Проверка на деление на 0
+  }
+
+  std::vector<int> resCoef(poly.coefficients.size());
+  for (size_t i = 0; i < poly.coefficients.size(); ++i) {
+    if (poly.coefficients[i] == 0) {
+      throw std::runtime_error(
+          "Division by zero coefficient in polynomial"); // Проверка
+                                                         // коэффициентов
+    }
+    resCoef[i] =
+        scal / poly.coefficients[i]; // Делим скаляр на каждый коэффициент
+  }
+
+  return Polynomial(resCoef);
 }
