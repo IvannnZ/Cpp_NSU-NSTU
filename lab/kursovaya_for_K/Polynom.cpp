@@ -3,164 +3,153 @@
 #include <cmath>
 #include <stdexcept>
 
-
+// Конструктор по умолчанию, создающий полином с одним коэффициентом 0
 Polynom::Polynom() : coef(1, 0) {}
 
+// Конструктор с параметром, принимающим вектор коэффициентов
 Polynom::Polynom(const std::vector<int> &coef) : coef(coef) {}
 
-Polynom::Polynom(const Polynom &other)
-    : coef(other.coef) {}
+// Конструктор копирования
+Polynom::Polynom(const Polynom &other) : coef(other.coef) {}
 
-Polynom::~Polynom() {
+// Деструктор
+Polynom::~Polynom() {}
 
-}
-
+// Оператор присваивания
 Polynom &Polynom::operator=(const Polynom &other) {
   if (this != &other) {
-    coef = other.coef;
+    coef = other.coef; // Копируем вектор коэффициентов
   }
   return *this;
 }
 
+// Сложение двух полиномов
 Polynom Polynom::operator+(const Polynom &other) const {
   size_t maxSize = std::max(coef.size(), other.coef.size());
   std::vector<int> resCoef(maxSize, 0);
 
   for (size_t i = 0; i < maxSize; ++i) {
-    int a;
-    if (i < coef.size()) {
-      a = coef[i];
-    } else {
-      a = 0;
-    }
-    int b;
-    if (i < other.coef.size()) {
-      b = other.coef[i];
-    } else {
-      b = 0;
-    }
-    resCoef[i] = a + b;
+    int a =
+        (i < coef.size()) ? coef[i] : 0; // Коэффициент первого полинома или 0
+    int b = (i < other.coef.size()) ? other.coef[i]
+                                    : 0; // Коэффициент второго полинома или 0
+    resCoef[i] = a + b;                  // Складываем коэффициенты
   }
-  Polynom ret = Polynom(resCoef);
-  return ret;
+
+  return Polynom(resCoef);
 }
 
+// Вычитание двух полиномов
 Polynom Polynom::operator-(const Polynom &other) const {
   size_t maxSize = std::max(coef.size(), other.coef.size());
   std::vector<int> resCoef(maxSize, 0.0);
 
   for (size_t i = 0; i < maxSize; ++i) {
-    int a;
-    if (i < coef.size()) {
-      a = coef[i];
-    } else {
-      a = 0.0;
-    }
-    int b;
-    if (i < other.coef.size()) {
-      b = other.coef[i];
-    } else {
-      b = 0.0;
-    }
-    resCoef[i] = a - b;
+    int a = (i < coef.size()) ? coef[i] : 0;
+    int b = (i < other.coef.size()) ? other.coef[i] : 0;
+    resCoef[i] = a - b; // Вычитаем коэффициенты
   }
-  Polynom ret = Polynom(resCoef);
-  return ret;
+
+  return Polynom(resCoef);
 }
 
+// Умножение двух полиномов
 Polynom Polynom::operator*(const Polynom &other) const {
-  std::vector<int> resCoef(coef.size() + other.coef.size() - 1, 0.0);
+  // Размер нового полинома будет равен сумме степеней полиномов минус 1
+  std::vector<int> resCoef(coef.size() + other.coef.size() - 1, 0);
 
   for (size_t i = 0; i < coef.size(); ++i) {
     for (size_t j = 0; j < other.coef.size(); ++j) {
-      resCoef[i + j] += coef[i] * other.coef[j];
+      resCoef[i + j] +=
+          coef[i] * other.coef[j]; // Перемножаем и складываем степени
     }
   }
-  Polynom ret = Polynom(resCoef);
-  return ret;
+
+  return Polynom(resCoef);
 }
 
+// Умножение полинома на скаляр
 Polynom Polynom::operator*(int scal) const {
   if (scal == 0) {
-    Polynom a;
-    return a;
+    return Polynom(); // Если скаляр равен 0, возвращаем нулевой полином
   }
-  std::vector<int> resCoef(coef.size());
 
+  std::vector<int> resCoef(coef.size());
   for (size_t i = 0; i < coef.size(); ++i) {
     resCoef[i] = coef[i] * scal;
   }
-  Polynom ret = Polynom(resCoef);
-  return ret;
+
+  return Polynom(resCoef);
 }
 
+// Деление полинома на скаляр
 Polynom Polynom::operator/(int scal) const {
   if (scal == 0)
-    throw std::runtime_error("Division by zero");
-  std::vector<int> resCoef(coef.size());
+    throw std::runtime_error("Division by zero"); // Проверка на деление на ноль
 
+  std::vector<int> resCoef(coef.size());
   for (size_t i = 0; i < coef.size(); ++i) {
-    resCoef[i] = coef[i] / scal;
+    resCoef[i] = coef[i] / scal; // Делим каждый коэффициент на скаляр
   }
-  Polynom ret = Polynom(resCoef);
-  return ret;
+
+  return Polynom(resCoef);
 }
 
-// Арифметика с накоплением
+// Операторы сложения и вычитания с накоплением
 Polynom &Polynom::operator+=(const Polynom &other) {
-  *this = *this + other;
+  *this = *this + other; // Вызываем оператор сложения
   return *this;
 }
 
 Polynom &Polynom::operator-=(const Polynom &other) {
-  *this = *this - other;
+  *this = *this - other; // Вызываем оператор вычитания
   return *this;
 }
 
-// Унарные операторы
+// Унарные операторы увеличения и уменьшения
 Polynom &Polynom::operator++() {
-  coef[0] += 1;
+  coef[0] += 1; // Увеличиваем свободный коэффициент
   return *this;
 }
 
 Polynom Polynom::operator++(int) {
   Polynom temp = *this;
-  ++(*this);
+  ++(*this); // Вызываем префиксный инкремент
   return temp;
 }
 
 Polynom &Polynom::operator--() {
-  coef[0] -= 1;
+  coef[0] -= 1; // Уменьшаем свободный коэффициент
   return *this;
 }
 
 Polynom Polynom::operator--(int) {
   Polynom temp = *this;
-  --(*this);
+  --(*this); // Вызываем префиксный декремент
   return temp;
 }
 
-// Логические операторы
+// Логические операторы сравнения
 bool Polynom::operator==(const Polynom &other) const {
-  return coef == other.coef;
+  return coef == other.coef; // Сравниваем коэффициенты
 }
 
 bool Polynom::operator!=(const Polynom &other) const {
-  return !(*this == other);
+  return !(*this == other); // Проверяем на неравенство
 }
 
 bool Polynom::operator<(const Polynom &other) const {
-  return coef.size() < other.coef.size();
+  return coef.size() < other.coef.size(); // Сравниваем размеры полиномов
 }
 
 bool Polynom::operator>(const Polynom &other) const {
-  return coef.size() > other.coef.size();
+  return coef.size() > other.coef.size(); // Сравниваем размеры полиномов
 }
 
-// Оператор доступа к элементу
+// Операторы доступа к элементам
 int Polynom::operator[](size_t index) const {
   if (index >= coef.size())
-    throw std::out_of_range("Index out of range");
+    throw std::out_of_range("Index out of range"); // Проверяем диапазон
   return coef[index];
 }
 
@@ -170,19 +159,20 @@ int &Polynom::operator[](size_t index) {
   return coef[index];
 }
 
-
+// Метод вывода полинома в консоль
 void Polynom::print() const {
   bool first = true;
 
-  if (coef.size() == 1){
-    std::cout<< coef[0]<<std::endl;
+  if (coef.size() == 1) {
+    std::cout << coef[0] << std::endl;
     return;
   }
+
   for (int i = coef.size() - 1; i >= 0; --i) {
     int coeff = coef[i];
 
-    // Пропускаем нулевые коэффициенты
-    if (coeff == 0) continue;
+    if (coeff == 0)
+      continue; // Пропускаем нулевые коэффициенты
 
     if (coeff < 0) {
       if (!first) {
@@ -190,95 +180,100 @@ void Polynom::print() const {
       } else {
         std::cout << "-";
       }
-      coeff = -coeff;
-    } else {
-      if (!first) {
-        std::cout << " + ";
-      }
+      coeff = -coeff; // Меняем знак для вывода
+    } else if (!first) {
+      std::cout << " + ";
     }
+
     first = false;
 
-      // Выводим коэффициент, если он не 1 и не -1, или если степень 0
-      if (coeff != 1 || i == 0) {
-        std::cout << coeff;
-      }
+    if (coeff != 1 || i == 0) {
+      std::cout << coeff; // Выводим коэффициент
+    }
 
-      // Выводим степень x, если она больше 0
-      if (i > 0) {
-        std::cout << "x";
-        if (i > 1) {
-          std::cout << "^" << i;
-        }
+    if (i > 0) {
+      std::cout << "x";
+      if (i > 1) {
+        std::cout << "^" << i; // Выводим степень
       }
+    }
   }
   std::cout << std::endl;
 }
 
-// Оператор преобразования в int
-// возвращает старший коэффициент
+// Преобразование в int: возвращает старший коэффициент
 Polynom::operator int() const {
-
   if (coef.empty()) {
-    return 0;
+    return 0; // Если коэффициентов нет, возвращаем 0
   }
-  return coef.back();  // Старший коэффициент — последний элемент в vector
+  return coef.back(); // Последний элемент в векторе — старший коэффициент
 }
 
-// Оператор преобразования в double
-// Вычисляет значение полинома при x = 1
+// Преобразование в double: вычисляет значение при x = 1
 Polynom::operator double() const {
   double result = 0.0;
   for (int coeff : coef) {
-    result += coeff;  // Сумма всех коэффициентов как значение при x = 1
+    result += coeff; // Суммируем все коэффициенты
   }
   return result;
 }
 
-// Вспомогательная функция для вычисления значения полинома при x
+// Вычисление значения полинома при заданном x
 int Polynom::evaluate(int x) const {
   int result = 0;
   for (size_t i = 0; i < coef.size(); ++i) {
-    result += coef[i] * std::pow(x, i);
+    result += coef[i] * std::pow(x, i); // Вычисляем значение по формуле
   }
   return result;
 }
 
-Polynom operator+(int scal, const Polynom & poly) {
-  // Складываем скаляр только с нулевым коэффициентом
+// Арифметические операции с полиномом и скаляром
+Polynom operator+(int scal, const Polynom &poly) {
   std::vector<int> resCoef = poly.coef;
   if (!resCoef.empty()) {
-    resCoef[0] += scal;
+    resCoef[0] += scal; // Добавляем скаляр к свободному коэффициенту
   } else {
-    resCoef.push_back(scal);
+    resCoef.push_back(scal); // Если полином пуст, создаем новый
   }
   return Polynom(resCoef);
 }
 
-Polynom operator-(int scal, const Polynom & poly) {
-  // Вычитаем полином из скаляра, инвертируем знак всех коэффициентов полинома
+Polynom operator-(int scal, const Polynom &poly) {
   std::vector<int> resCoef(poly.coef.size());
   for (size_t i = 0; i < poly.coef.size(); ++i) {
-    resCoef[i] = -poly.coef[i];
+    resCoef[i] = -poly.coef[i]; // Инвертируем все коэффициенты
   }
   if (!resCoef.empty()) {
-    resCoef[0] += scal;
+    resCoef[0] += scal; // Добавляем скаляр к свободному коэффициенту
   } else {
     resCoef.push_back(scal);
   }
   return Polynom(resCoef);
 }
 
-Polynom operator*(int scal, const Polynom & poly) {
-  // Просто умножаем все коэффициенты на скаляр
+Polynom operator*(int scal, const Polynom &poly) {
   std::vector<int> resCoef(poly.coef.size());
   for (size_t i = 0; i < poly.coef.size(); ++i) {
-    resCoef[i] = poly.coef[i] * scal;
+    resCoef[i] = poly.coef[i] * scal; // Умножаем все коэффициенты на скаляр
   }
   return Polynom(resCoef);
 }
 
-Polynom operator/(int scal, const Polynom & poly) {
-  throw std::runtime_error("Operation 'scalar / Polynomial' is not supported");
-  // Если нужно реализовать, это более сложная задача,
-  // связанная с разбиением полинома.
+Polynom operator/(int scal, const Polynom &poly) {
+  if (scal == 0) {
+    throw std::runtime_error(
+        "Division by zero scalar is not allowed"); // Проверка на деление на 0
+  }
+
+  std::vector<int> resCoef(poly.coef.size());
+  for (size_t i = 0; i < poly.coef.size(); ++i) {
+    if (poly.coef[i] == 0) {
+      throw std::runtime_error(
+          "Division by zero coefficient in polynomial"); // Проверка
+                                                         // коэффициентов
+    }
+    resCoef[i] = scal / poly.coef[i]; // Делим скаляр на каждый коэффициент
+  }
+
+  return Polynom(resCoef);
 }
