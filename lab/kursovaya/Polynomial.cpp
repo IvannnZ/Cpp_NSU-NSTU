@@ -208,6 +208,7 @@ void Polynomial::print() const {
 // Оператор преобразования в int
 // возвращает старший коэффициент
 Polynomial::operator int() const {
+
   if (coefficients.empty()) {
     return 0;
   }

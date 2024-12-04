@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/Lab2_9/cmake-build-debug"
+			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -151,11 +151,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "CXX compiler"
+					"value" : "No help, variable specified on the command line."
 				}
 			],
-			"type" : "STRING",
-			"value" : "/usr/bin/g++"
+			"type" : "UNINITIALIZED",
+			"value" : "g++"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER_AR",
@@ -279,11 +279,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "C compiler"
+					"value" : "No help, variable specified on the command line."
 				}
 			],
-			"type" : "STRING",
-			"value" : "/usr/bin/gcc"
+			"type" : "UNINITIALIZED",
+			"value" : "gcc"
 		},
 		{
 			"name" : "CMAKE_C_COMPILER_AR",
@@ -543,7 +543,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/Lab2_9/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -603,7 +603,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/Lab2_9"
+			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -843,7 +843,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Lab2_9"
+			"value" : "kursovaya_for_K"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1142,7 +1142,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "Lab2_9_BINARY_DIR",
+			"name" : "Project_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1151,10 +1151,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/Lab2_9/cmake-build-debug"
+			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K/cmake-build-debug"
 		},
 		{
-			"name" : "Lab2_9_IS_TOP_LEVEL",
+			"name" : "Project_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1166,7 +1166,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "Lab2_9_SOURCE_DIR",
+			"name" : "Project_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1175,7 +1175,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/Lab2_9"
+			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
@@ -1188,6 +1188,42 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "TRUE"
+		},
+		{
+			"name" : "kursovaya_for_K_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K/cmake-build-debug"
+		},
+		{
+			"name" : "kursovaya_for_K_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "kursovaya_for_K_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K"
 		}
 	],
 	"kind" : "cache",

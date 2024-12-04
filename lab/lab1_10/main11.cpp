@@ -95,7 +95,7 @@ int main(int argc, char* argv[]) {
     FILE *foutput = fopen(output_filename.c_str(), "wb");
     if (foutput == NULL) {
         std::cout << "Error can't open output file\n";
-        fclose(finput);
+        fclose(foutput);
         return 53;
     }
 

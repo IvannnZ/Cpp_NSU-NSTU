@@ -1,18 +1,6 @@
 # ninja log v6
 1	22	1730868463056302793	CMakeFiles/kursovaya.dir/polinom.cpp.o	ff44260b4c3abe2c
-3	762	1730882115195891313	CMakeFiles/kursovaya.dir/main.cpp.o	d9517bea0b353ca
-0	27	1730882398243444842	build.ninja	341e4b7ce9171ef2
-895	1048	1730882343226504704	kursovaya	697698aa4cff0e3a
-2	895	1730882342333488120	CMakeFiles/kursovaya.dir/Polynomial.cpp.o	718df15e3da5578f
-2	580	1730882410184628637	CMakeFiles/kursovaya.dir/Polynomial.cpp.o	718df15e3da5578f
-580	689	1730882410762637358	kursovaya	697698aa4cff0e3a
-2	617	1730882515793972915	CMakeFiles/kursovaya.dir/Polynomial.cpp.o	718df15e3da5578f
-617	708	1730882516408979372	kursovaya	697698aa4cff0e3a
-1	328	1730882525220070280	CMakeFiles/kursovaya.dir/Polynomial.cpp.o	718df15e3da5578f
-328	389	1730882525547073596	kursovaya	697698aa4cff0e3a
-5	326	1730961686357778315	CMakeFiles/kursovaya.dir/main.cpp.o	d9517bea0b353ca
-6	358	1730961686358778387	CMakeFiles/kursovaya.dir/Polynomial.cpp.o	718df15e3da5578f
-358	416	1730961686710803748	kursovaya	697698aa4cff0e3a
-3	367	1731132776060974326	CMakeFiles/kursovaya.dir/Polynomial.cpp.o	718df15e3da5578f
 1	200	1731132889110305353	CMakeFiles/kursovaya.dir/main.cpp.o	d9517bea0b353ca
+0	27	1733126028613196927	build.ninja	341e4b7ce9171ef2
 200	262	1731132889309298954	kursovaya	697698aa4cff0e3a
+3	367	1731132776060974326	CMakeFiles/kursovaya.dir/Polynomial.cpp.o	718df15e3da5578f
