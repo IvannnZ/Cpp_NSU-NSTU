@@ -56,8 +56,8 @@ build CMakeFiles/kursovaya_for_K.dir/main.cpp.o: CXX_COMPILER__kursovaya_for_K_u
   OBJECT_DIR = CMakeFiles/kursovaya_for_K.dir
   OBJECT_FILE_DIR = CMakeFiles/kursovaya_for_K.dir
 
-build CMakeFiles/kursovaya_for_K.dir/Polynomial.cpp.o: CXX_COMPILER__kursovaya_for_K_unscanned_Debug /home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K/Polynomial.cpp || cmake_object_order_depends_target_kursovaya_for_K
-  DEP_FILE = CMakeFiles/kursovaya_for_K.dir/Polynomial.cpp.o.d
+build CMakeFiles/kursovaya_for_K.dir/Polynom.cpp.o: CXX_COMPILER__kursovaya_for_K_unscanned_Debug /home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K/Polynom.cpp || cmake_object_order_depends_target_kursovaya_for_K
+  DEP_FILE = CMakeFiles/kursovaya_for_K.dir/Polynom.cpp.o.d
   FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/ivannz/Programing/Cpp_NSU-NSTU/lab/kursovaya_for_K/.
   OBJECT_DIR = CMakeFiles/kursovaya_for_K.dir
@@ -71,7 +71,7 @@ build CMakeFiles/kursovaya_for_K.dir/Polynomial.cpp.o: CXX_COMPILER__kursovaya_f
 #############################################
 # Link the executable kursovaya_for_K
 
-build kursovaya_for_K: CXX_EXECUTABLE_LINKER__kursovaya_for_K_Debug CMakeFiles/kursovaya_for_K.dir/main.cpp.o CMakeFiles/kursovaya_for_K.dir/Polynomial.cpp.o
+build kursovaya_for_K: CXX_EXECUTABLE_LINKER__kursovaya_for_K_Debug CMakeFiles/kursovaya_for_K.dir/main.cpp.o CMakeFiles/kursovaya_for_K.dir/Polynom.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/kursovaya_for_K.dir
   POST_BUILD = :

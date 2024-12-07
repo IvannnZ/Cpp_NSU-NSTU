@@ -26,13 +26,14 @@ Polynom &Polynom::operator=(const Polynom &other) {
 // Сложение двух полиномов
 Polynom Polynom::operator+(const Polynom &other) const {
   size_t maxSize = std::max(coef.size(), other.coef.size());
+
   std::vector<int> resCoef(maxSize, 0);
 
   for (size_t i = 0; i < maxSize; ++i) {
-    int a =
-        (i < coef.size()) ? coef[i] : 0; // Коэффициент первого полинома или 0
-    int b = (i < other.coef.size()) ? other.coef[i]
-                                    : 0; // Коэффициент второго полинома или 0
+    int a= (i < coef.size()) ? coef[i] : 0;
+    // Коэффициент первого полинома или 0
+    int b = (i < other.coef.size()) ? other.coef[i] : 0;
+    // Коэффициент второго полинома или 0
     resCoef[i] = a + b;                  // Складываем коэффициенты
   }
 
@@ -147,11 +148,11 @@ bool Polynom::operator>(const Polynom &other) const {
 }
 
 // Операторы доступа к элементам
-int Polynom::operator[](size_t index) const {
-  if (index >= coef.size())
-    throw std::out_of_range("Index out of range"); // Проверяем диапазон
-  return coef[index];
-}
+//int Polynom::operator[](size_t index) const {
+//  if (index >= coef.size())
+//    throw std::out_of_range("Index out of range"); // Проверяем диапазон
+//  return coef[index];
+//}
 
 int &Polynom::operator[](size_t index) {
   if (index >= coef.size())

@@ -4,9 +4,6 @@
 #include <stdexcept>
 
 
-//make scal operator class
-
-
 // Конструктор по умолчанию создает нулевой полином
 Polynomial::Polynomial() : coefficients(1, 0) {}
 
@@ -172,7 +169,6 @@ void Polynomial::print() const {
   for (int deg_x = coefficients.size() - 1; deg_x >= 0; --deg_x) {
     int coeff = coefficients[deg_x];
 
-    // Пропускаем нулевые коэффициенты
     if (coeff == 0) continue;
 
     if (coeff < 0) {
@@ -189,12 +185,10 @@ void Polynomial::print() const {
     }
     first = false;
 
-      // Выводим коэффициент, если он не 1 и не -1, или если степень 0
       if (coeff != 1 || deg_x == 0) {
         std::cout << coeff;
       }
 
-      // Выводим степень x, если она больше 0
       if (deg_x > 0) {
         std::cout << "x";
         if (deg_x > 1) {
@@ -212,7 +206,7 @@ Polynomial::operator int() const {
   if (coefficients.empty()) {
     return 0;
   }
-  return coefficients.back();  // Старший коэффициент — последний элемент в vector
+  return coefficients.back();
 }
 
 // Оператор преобразования в double
@@ -220,7 +214,7 @@ Polynomial::operator int() const {
 Polynomial::operator double() const {
   double result = 0.0;
   for (int coeff : coefficients) {
-    result += coeff;  // Сумма всех коэффициентов как значение при x = 1
+    result += coeff;
   }
   return result;
 }
