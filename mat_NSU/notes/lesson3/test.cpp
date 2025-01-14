@@ -6,7 +6,7 @@ void fun()
     int a;
     std::cout << "a:" << a << std::endl;
     int b[3] = {1};
-    std::cout << "b[0] b[1] b:" << b[0] << ' ' << b[1] << ' ' << b << std::endl;
+    std::cout << "b[0] b[1] b:" << b[0] << ' ' << 1[b] << ' ' << b << std::endl; //так тоже можно, и это раотает корректно, но не стоит так делать
     int* c[3];
     std::cout << "c[0] c:" << c[0] << ' ' << c << std::endl;
 }
