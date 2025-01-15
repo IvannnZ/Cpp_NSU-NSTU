@@ -25,14 +25,12 @@ void const_test(){
     ptr_const_a = ptr;
 
     ptr_a = &a;
-    int const* const_ptr_a;
-    const_ptr_a = &a;
-    int * const const_ptr_const_a;
-    const_ptr_const_a = &const_a;
-    //const_ptr_a = 1;
-    const_ptr_a = ptr;
-    //*const_ptr_a = 1;
-    const_ptr_const_a = ptr;
+    int *const const_ptr_a = &a;
+    const int * const const_ptr_const_a = &const_a;
+    //const_ptr_a = ptr;
+    *const_ptr_a = 1;
+    //const_ptr_const_a = ptr;
+    //*const_ptr_const_a = 1;
 }
 
 int main()
