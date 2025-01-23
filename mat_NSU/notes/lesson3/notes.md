@@ -178,3 +178,12 @@ void* operator new (size_t );
 void operator delete(void* p);  
 void* operator new [] (size_t );  
 void operator delete[] (void *p);  
+
+# RAII или же умные указатели (будет позже)
+#### Resource Acquisition Is Initialisation
+
+* Эта идиома удобна для объектов владеющих ресурсами
+
+# Утечки памяти (memory leaks)*
+
+* в линуксе valgrindУ
