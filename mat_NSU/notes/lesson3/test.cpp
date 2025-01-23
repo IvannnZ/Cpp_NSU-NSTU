@@ -11,6 +11,12 @@ void fun()
     std::cout << "c[0] c:" << c[0] << ' ' << c << std::endl;
 }
 
+void alloc_test(){
+    int *p = new int (42);
+    std::cout<< "p:" << *p << std::endl;
+}
+
+
 void const_test(){
     int a = 5;
     const int const_a = 2;
@@ -35,18 +41,19 @@ void const_test(){
 
 int main()
 {
-    int a;
-    std::cout << "a:" << a << std::endl;
-    int b[3] = {1};
-    std::cout << "b[0] b[1] b:" << b[0] << ' ' << b[1] << ' ' << b << std::endl;
-    int* c[3];
-    std::cout << "c[0] c:" << c[0] << ' ' << c << std::endl;
-    fun();
-
-    a = 42;
-    int* ptr = &a;
-    std::cout << ptr << std::endl;
-    ptr -= 5; //
-    std::cout << a << " " << *ptr << std::endl;
+//    int a;
+//    std::cout << "a:" << a << std::endl;
+//    int b[3] = {1};
+//    std::cout << "b[0] b[1] b:" << b[0] << ' ' << b[1] << ' ' << b << std::endl;
+//    int* c[3];
+//    std::cout << "c[0] c:" << c[0] << ' ' << c << std::endl;
+//    fun();
+//
+//    a = 42;
+//    int* ptr = &a;
+//    std::cout << ptr << std::endl;
+//    ptr -= 5; //
+//    std::cout << a << " " << *ptr << std::endl;
+    alloc_test();
     return 0;
 }
