@@ -186,4 +186,4 @@ void operator delete[] (void *p);
 
 # Утечки памяти (memory leaks)*
 
-* в линуксе valgrindУ
+* в линуксе valgrind
