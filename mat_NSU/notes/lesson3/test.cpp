@@ -1,4 +1,14 @@
 #include <iostream>
+#include <vector>
+
+void test(std::vector<int> v)
+{
+    for (std::vector<int>::iterator i = v.begin(); i != v.end(); ++i)
+    {
+        const int a = *i;
+        std::cout<<a;
+    }
+}
 
 void fun()
 {
